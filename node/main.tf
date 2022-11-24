@@ -40,6 +40,7 @@ resource "aws_instance" "instance" {
     source      = "./secret_key"
   }
   provisioner "remote-exec" {
+    # Required to make the private key usable
     inline = [
       "chmod 400 ${local.remote_key_path}",
     ]
