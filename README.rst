@@ -1,6 +1,8 @@
 Kubernetes Lab
 ==============
 
+One-click infrastructure provisioning for my Kubernetes Lab
+
 Create lab::
 
     make up
