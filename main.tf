@@ -15,7 +15,7 @@ module "control_plane" {
   source   = "./node"
   hostname = "control_plane"
   keyname  = aws_key_pair.remote_access.key_name
-  size     = "t2.nano" #"t2.medium"
+  size     = "t2.medium"
   security_group_ids = [
     aws_security_group.allow_ssh.id,
     aws_security_group.allow_vpc_traffic.id,
@@ -24,11 +24,11 @@ module "control_plane" {
 }
 
 module "worker_nodes" {
-  count    = 1
+  count    = 2
   source   = "./node"
   hostname = "worker_${count.index}"
   keyname  = aws_key_pair.remote_access.key_name
-  size     = "t2.nano" #"t2.micro"
+  size     = "t2.micro"
   security_group_ids = [
     aws_security_group.allow_ssh.id,
     aws_security_group.allow_vpc_traffic.id,

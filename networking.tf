@@ -28,15 +28,24 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_security_group" "allow_vpc_traffic" {
-  name        = "allow_tls"
-  description = "Allow SSH traffic between instances"
+  name        = "allow_internal_traffic"
+  description = "Allow internal traffic between instances"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-    self      = true
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    self        = true
+    description = "Enable SSH access between instances"
+  }
+
+  ingress {
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    self        = true
+    description = "Enable Kubernetes API access between instances"
   }
 
   egress {
